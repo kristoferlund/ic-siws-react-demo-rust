@@ -4,11 +4,11 @@
 
 ![](media/header.png)
 
-✅ Sign in with Ethereum to interact with smart contracts (canisters) on the [Internet Computer](https://internetcomputer.org) (IC)!
+✅ Sign in with Solana to interact with smart contracts (canisters) on the [Internet Computer](https://internetcomputer.org) (IC)!
 
-✅ Establish a one-to-one relationship between an Ethereum wallet and an IC identity.
+✅ Establish a one-to-one relationship between an Solana wallet and an IC identity.
 
-✅ Access the IC capabilities from Ethereum dapp frontends, create cross-chain dapps! Some of the features IC provide are:
+✅ Access the IC capabilities from Solana dapp frontends, create cross-chain dapps! Some of the features IC provide are:
 
 - Native integration with BTC and ETH
 - Twin tokens (ckBTC, ckETH)
@@ -18,9 +18,9 @@
 - Store large amounts of data cheaply
 - etc
 
-This React demo application and template demonstrates how to login Ethereum users into an IC canister using the [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siwe-identity) hook and [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siwe_provider) canister.
+This React demo application and template demonstrates how to login Solana users into an IC canister using the [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siwe-identity) hook and [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siws_provider) canister.
 
-The goal of the [ic-siws](https://github.com/kristoferlund/ic-siws) project is to enhance the interoperability between Ethereum and the Internet Computer platform, enabling developers to build applications that leverage the strengths of both platforms.
+The goal of the [ic-siws](https://github.com/kristoferlund/ic-siws) project is to enhance the interoperability between Solana and the Internet Computer platform, enabling developers to build applications that leverage the strengths of both platforms.
 
 ## 👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
 
@@ -30,8 +30,8 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 - TypeScript
 - TailwindCSS
-- Wagmi/Viem Ethereum libraries
-- RainbowKit for Ethereum wallet integration
+- Wagmi/Viem Solana libraries
+- RainbowKit for Solana wallet integration
 
 ## Table of contents
 
@@ -48,9 +48,9 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
   - [IC SIWS Provider](#ic-siws-provider-1)
   - [Backend](#backend-1)
   - [Frontend](#frontend-1)
-    - [SiweIdentityProvider](#siweidentityprovider)
+    - [SiwsIdentityProvider](#siweidentityprovider)
     - [AuthGuard](#authguard)
-    - [useSiweIdentity](#usesiweidentity)
+    - [useSiwsIdentity](#usesiweidentity)
 - [Updates](#updates)
 - [Contributing](#contributing)
 - [License](#license)
@@ -73,19 +73,19 @@ The frontend is a React application that interacts with the backend canister. To
 
 ### IC SIWS Provider
 
-The pre-built IC Siwe Provider is used to create an identity for the user. It is a a Rust based canister that implements the SIWS login flow. The flow starts with a SIWS message being generated and ends with a Delegate Identity being created for the user. The Delegate Identity gives the user access to the backend canister.
+The pre-built IC Siws Provider is used to create an identity for the user. It is a a Rust based canister that implements the SIWS login flow. The flow starts with a SIWS message being generated and ends with a Delegate Identity being created for the user. The Delegate Identity gives the user access to the backend canister.
 
 ## How it works
 
 This is the high-level flow between the app components when a user logs in:
 
-1. The application requests a SIWS message from the `ic_siwe_provider` canister on behalf of the user.
-2. The application displays the SIWS message to the user who signs it with their Ethereum wallet.
-3. The application sends the signed SIWS message to the `ic_siwe_provider` canister to login the user. The canister verifies the signature and creates an identity for the user.
-4. The application retrieves the identity from the `ic_siwe_provider` canister.
+1. The application requests a SIWS message from the `ic_siws_provider` canister on behalf of the user.
+2. The application displays the SIWS message to the user who signs it with their Solana wallet.
+3. The application sends the signed SIWS message to the `ic_siws_provider` canister to login the user. The canister verifies the signature and creates an identity for the user.
+4. The application retrieves the identity from the `ic_siws_provider` canister.
 5. The application can now use the identity to make authenticated calls to the app canister.
 
-![Sign in with Ethereum - Login flow](/media/flow.png)
+![Sign in with Solana - Login flow](/media/flow.png)
 
 ## Run locally
 
@@ -98,15 +98,15 @@ make deploy-all
 
 ### IC SIWS Provider
 
-The `ic_siwe_provider` canister is pre-built and added to the project as a dependency in the [dfx.json](/dfx.json) file.
+The `ic_siws_provider` canister is pre-built and added to the project as a dependency in the [dfx.json](/dfx.json) file.
 
 ```json
 {
   "canisters": {
-    "ic_siwe_provider": {
+    "ic_siws_provider": {
       "type": "custom",
-      "candid": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siwe_provider.did",
-      "wasm": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siwe_provider.wasm.gz"
+      "candid": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siws_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siws_provider.wasm.gz"
     },
     ...
   },
@@ -117,7 +117,7 @@ The `ic_siwe_provider` canister is pre-built and added to the project as a depen
 Its behavior is configured and passed as an argument to the canister `init` function. Below is an example of how to configure the canister using the `dfx` command line tool in the project [Makefile](/Makefile):
 
 ```makefile
-dfx deploy ic_siwe_provider --argument "( \
+dfx deploy ic_siws_provider --argument "( \
     record { \
         domain = \"127.0.0.1\"; \
         uri = \"http://127.0.0.1:5173\"; \
@@ -128,51 +128,51 @@ dfx deploy ic_siwe_provider --argument "( \
         sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
         session_expires_in = opt 604800000000000; /* 1 week */ \
         targets = opt vec { \
-            \"$$(dfx canister id ic_siwe_provider)\"; \
+            \"$$(dfx canister id ic_siws_provider)\"; \
             \"$$(dfx canister id backend)\"; \
         }; \
     } \
 )"
 ```
 
-For more information about the configuration options, see the [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siwe_provider) documentation.
+For more information about the configuration options, see the [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siws_provider) documentation.
 
 ### Backend
 
-The backend is a Rust based canister that, for demonstration purposes, implements some basic functionality for managing user profiles. It is also given an init argument - the `ic_siwe_provider` canister id - to be able to verify the identity of the user.
+The backend is a Rust based canister that, for demonstration purposes, implements some basic functionality for managing user profiles. It is also given an init argument - the `ic_siws_provider` canister id - to be able to verify the identity of the user.
 
 ```makefile
-dfx deploy backend --argument "$$(dfx canister id ic_siwe_provider)"
+dfx deploy backend --argument "$$(dfx canister id ic_siws_provider)"
 ```
 
 ### Frontend
 
-The frontend is a React application that interacts with the backend canister. To be able to make authenticated calls to the backend canister, the frontend needs an identity. The identity is retrieved from the `ic_siwe_provider` canister.
+The frontend is a React application that interacts with the backend canister. To be able to make authenticated calls to the backend canister, the frontend needs an identity. The identity is retrieved from the `ic_siws_provider` canister.
 
 The frontend uses two other packages from the `ic-siws` project to simplify logging in users and making authenticated calls to canisters:
 
 - [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siwe-identity) - React hook and context provider for easy frontend integration with SIWS enabled Internet Computer canisters.
 - [ic-use-actor](https://github.com/kristoferlund/ic-use-actor) - A React context provider for managing Internet Computer (IC) actors with enhanced features like type safety and request/response interceptors.
 
-#### [SiweIdentityProvider](src/frontend/src/main.tsx)
+#### [SiwsIdentityProvider](src/frontend/src/main.tsx)
 
-The application's root component is wrapped with `SiweIdentityProvider` to provide all child components access to the SIWS identity context.
+The application's root component is wrapped with `SiwsIdentityProvider` to provide all child components access to the SIWS identity context.
 
 ```jsx
 // main.tsx
 
-import { SiweIdentityProvider } from 'ic-use-siwe-identity';
-import { _SERVICE } from "../../declarations/ic_siwe_provider/ic_siwe_provider.did";
+import { SiwsIdentityProvider } from 'ic-use-siwe-identity';
+import { _SERVICE } from "../../declarations/ic_siws_provider/ic_siws_provider.did";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     // ...
-    <SiweIdentityProvider<_SERVICE>
+    <SiwsIdentityProvider<_SERVICE>
       canisterId={canisterId}
       idlFactory={idlFactory}
     >
       // ... app components
-    </SiweIdentityProvider>
+    </SiwsIdentityProvider>
     // ...
   </React.StrictMode>,
 );
@@ -182,17 +182,17 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 An `AuthGuard` component is used to protect routes that require the user to be logged in. It also makes sure to log out the user if they change ethereum wallet etc.
 
-#### [useSiweIdentity](src/frontend/src/components/login/LoginButton.tsx)
+#### [useSiwsIdentity](src/frontend/src/components/login/LoginButton.tsx)
 
-To initiate the login flow, the `login` function is called on the Use the `useSiweIdentity` hook.
+To initiate the login flow, the `login` function is called on the Use the `useSiwsIdentity` hook.
 
 ```jsx
 // LoginButton.tsx
 
-import { useSiweIdentity } from "ic-use-siws-identity";
+import { useSiwsIdentity } from "ic-use-siws-identity";
 
 function LoginButton() {
-  const { login, clear, identity, ... } = useSiweIdentity();
+  const { login, clear, identity, ... } = useSiwsIdentity();
   // ...
 }
 ```
