@@ -18,11 +18,11 @@
 - Store large amounts of data cheaply
 - etc
 
-This React demo application and template demonstrates how to login Solana users into an IC canister using the [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siwe-identity) hook and [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siws_provider) canister.
+This React demo application and template demonstrates how to login Solana users into an IC canister using the [ic-use-siws-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siws-identity) hook and [ic-siws-provider](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic_siws_provider) canister.
 
 The goal of the [ic-siws](https://github.com/kristoferlund/ic-siws) project is to enhance the interoperability between Solana and the Internet Computer platform, enabling developers to build applications that leverage the strengths of both platforms.
 
-## 👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io
+## 👀 Try the live demo: https://guidq-3qaaa-aaaal-qiteq-cai.icp0.io
 
 ## Key features
 
@@ -35,9 +35,6 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 ## Table of contents
 
-- [👀 Try the live demo: https://shtr2-2iaaa-aaaal-qckva-cai.icp0.io](#-try-the-live-demo-httpsshtr2-2iaaa-aaaal-qckva-caiicp0io)
-- [Key features](#key-features)
-- [Table of contents](#table-of-contents)
 - [App components](#app-components)
   - [Backend](#backend)
   - [Frontend](#frontend)
@@ -105,8 +102,8 @@ The `ic_siws_provider` canister is pre-built and added to the project as a depen
   "canisters": {
     "ic_siws_provider": {
       "type": "custom",
-      "candid": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siws_provider.did",
-      "wasm": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.5/ic_siws_provider.wasm.gz"
+      "candid": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.1/ic_siws_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.1/ic_siws_provider.wasm.gz"
     },
     ...
   },
@@ -122,7 +119,7 @@ dfx deploy ic_siws_provider --argument "( \
         domain = \"127.0.0.1\"; \
         uri = \"http://127.0.0.1:5173\"; \
         salt = \"salt\"; \
-        chain_id = opt 1; \
+        chain_id = opt \"mainnet\"; \
         scheme = opt \"http\"; \
         statement = opt \"Login to the app\"; \
         sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
@@ -151,7 +148,7 @@ The frontend is a React application that interacts with the backend canister. To
 
 The frontend uses two other packages from the `ic-siws` project to simplify logging in users and making authenticated calls to canisters:
 
-- [ic-use-siwe-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siwe-identity) - React hook and context provider for easy frontend integration with SIWS enabled Internet Computer canisters.
+- [ic-use-siws-identity](https://github.com/kristoferlund/ic-siws/tree/main/packages/ic-use-siws-identity) - React hook and context provider for easy frontend integration with SIWS enabled Internet Computer canisters.
 - [ic-use-actor](https://github.com/kristoferlund/ic-use-actor) - A React context provider for managing Internet Computer (IC) actors with enhanced features like type safety and request/response interceptors.
 
 #### [SiwsIdentityProvider](src/frontend/src/main.tsx)
@@ -161,7 +158,7 @@ The application's root component is wrapped with `SiwsIdentityProvider` to provi
 ```jsx
 // main.tsx
 
-import { SiwsIdentityProvider } from 'ic-use-siwe-identity';
+import { SiwsIdentityProvider } from 'ic-use-siws-identity';
 import { _SERVICE } from "../../declarations/ic_siws_provider/ic_siws_provider.did";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
