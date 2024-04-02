@@ -1,0 +1,22 @@
+{
+  "canisters": {
+    "ic_siws_provider": {
+      "type": "custom",
+      "candid": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.1/ic_siws_provider.did",
+      "wasm": "https://github.com/kristoferlund/ic-siws/releases/download/v0.0.1/ic_siws_provider.wasm.gz"
+    },
+    "backend": {
+      "candid": "src/backend/backend.did",
+      "package": "backend",
+      "type": "rust"
+    },
+    "frontend": {
+      "dependencies": ["backend", "ic_siws_provider"],
+      "source": ["dist"],
+      "type": "assets",
+      "build": ["npm run build"]
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

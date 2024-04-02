@@ -1,7 +1,4 @@
 
-> [!IMPORTANT]  
-> This repository is a work in progress and is not yet ready for use. 
-
 ![](media/header.png)
 
 ✅ Sign in with Solana to interact with smart contracts (canisters) on the [Internet Computer](https://internetcomputer.org) (IC)!
@@ -30,8 +27,6 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 - TypeScript
 - TailwindCSS
-- Wagmi/Viem Solana libraries
-- RainbowKit for Solana wallet integration
 
 ## Table of contents
 
@@ -56,7 +51,7 @@ The demo is buit using [Vite](https://vitejs.dev/) to provide a fast development
 
 If you are new to IC, please read the [Internet Computer Basics](https://internetcomputer.org/basics) before proceeding.
 
-For a detailed description of the SIWS concepts, see the [SIWS specification, EIP-4361](https://eips.ethereum.org/EIPS/eip-4361).
+For a detailed description of the SIWS wallet feature, see the [Phantom SIWS description](https://github.com/phantom/sign-in-with-solana/tree/e4060d2916469116d5080a712feaf81ea1db4f65) and the [SIWE specification, EIP-4361](https://eips.ethereum.org/EIPS/eip-4361).
 
 This app consists of three main components:
 
@@ -201,6 +196,13 @@ See the [CHANGELOG](CHANGELOG.md) for details on updates.
 ## Contributing
 
 Contributions are welcome. Please submit your pull requests or open issues to propose changes or report bugs.
+
+## Author
+
+- [kristofer@fmckl.se](mailto:kristofer@fmckl.se)
+- Twitter: [@kristoferlund](https://twitter.com/kristoferlund)
+- Discord: kristoferkristofer
+- Telegram: [@kristoferkristofer](https://t.me/kristoferkristofer)
 
 ## License
 
