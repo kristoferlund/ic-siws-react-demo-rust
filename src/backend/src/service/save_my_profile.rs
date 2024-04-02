@@ -4,8 +4,8 @@ use crate::{user_profile::UserProfile, GetAddressResponse, SIWS_PROVIDER_CANISTE
 
 #[update]
 async fn save_my_profile(name: String, avatar_url: String) -> Result<UserProfile, String> {
-    // Get the address of the caller from the siwe provider canister, return error if it fails. A failure
-    // here means that the caller is not authenticated using the siwe provider. This might happen if the
+    // Get the address of the caller from the siws provider canister, return error if it fails. A failure
+    // here means that the caller is not authenticated using the siws provider. This might happen if the
     // caller uses an anonymous principal or has authenticated using a different identity provider.
     let address = get_address().await?;
 
@@ -24,14 +24,14 @@ async fn save_my_profile(name: String, avatar_url: String) -> Result<UserProfile
     Ok(profile)
 }
 
-/// Call the `get_address` method on the siwe provider canister with the calling principal as an argument to get the
+/// Call the `get_address` method on the siws provider canister with the calling principal as an argument to get the
 /// address of the caller.
 async fn get_address() -> Result<String, String> {
-    // Get the siwe provider canister reference
+    // Get the siws provider canister reference
     let siws_provider_canister = SIWS_PROVIDER_CANISTER
         .with_borrow(|canister| canister.expect("Siws provider canister not initialized"));
 
-    // Call the `get_address` method on the siwe provider canister with the calling principal as an argument
+    // Call the `get_address` method on the siws provider canister with the calling principal as an argument
     let response: Result<(GetAddressResponse,), _> = ic_cdk::call(
         siws_provider_canister,
         "get_address",
