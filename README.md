@@ -1,3 +1,5 @@
+> [!IMPORTANT]  
+> This demo is deprecated, please see new demos at [ic-siws](https://github.com/kristoferlund/ic-siws).
 
 ![](media/header.png)
 
@@ -19,7 +21,7 @@ This React demo application and template demonstrates how to login Solana users 
 
 The goal of the [ic-siws](https://github.com/kristoferlund/ic-siws) project is to enhance the interoperability between Solana and the Internet Computer platform, enabling developers to build applications that leverage the strengths of both platforms.
 
-## 👀 Try the live demo: https://guidq-3qaaa-aaaal-qiteq-cai.icp0.io
+## 👀 Try the live demo: <https://guidq-3qaaa-aaaal-qiteq-cai.icp0.io>
 
 ## Key features
 
